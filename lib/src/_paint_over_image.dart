@@ -593,7 +593,7 @@ class ImagePainterState extends State<ImagePainter> {
             children: [
               IconButton(
                   tooltip: textDelegate.undo,
-                  icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.grey[700]),
+                  icon: widget.undoIcon ?? const Icon(Icons.reply, color: Colors.white),
                   onPressed: () {
                     if (_paintHistory.isNotEmpty) {
                       setState(_paintHistory.removeLast);
@@ -601,7 +601,7 @@ class ImagePainterState extends State<ImagePainter> {
                   }),
               IconButton(
                 tooltip: textDelegate.clearAllProgress,
-                icon: widget.clearAllIcon ?? Icon(Icons.clear, color: Colors.grey[700]),
+                icon: widget.clearAllIcon ?? const Icon(Icons.clear, color: Colors.white),
                 onPressed: () => setState(_paintHistory.clear),
               ),
             ],
@@ -740,7 +740,6 @@ class ImagePainterState extends State<ImagePainter> {
               return ColorItem(
                 isSelected: color == controller.color,
                 color: color,
-                radius: widget.iconSize,
                 onTap: () {
                   _controller.value = controller.copyWith(color: color);
                   if (widget.onColorChanged != null) {
