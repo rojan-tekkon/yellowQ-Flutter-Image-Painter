@@ -45,6 +45,7 @@ class ImagePainter extends StatefulWidget {
       this.onPaintModeChanged,
       this.controlColor,
       this.onImageCompleted,
+      this.iconSize = 40,
       this.textDelegate})
       : super(key: key);
 
@@ -71,6 +72,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     Color? controlColor,
     VoidCallback? onImageCompleted,
+    double? iconSize,
   }) {
     return ImagePainter._(
       key: key,
@@ -94,6 +96,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       controlColor: controlColor,
       onImageCompleted: onImageCompleted,
+      iconSize: iconSize,
     );
   }
 
@@ -120,6 +123,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     Color? controlColor,
     VoidCallback? onImageCompleted,
+    double? iconSize,
   }) {
     return ImagePainter._(
       key: key,
@@ -143,6 +147,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       controlColor: controlColor,
       onImageCompleted: onImageCompleted,
+      iconSize: iconSize,
     );
   }
 
@@ -169,6 +174,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     Color? controlColor,
     VoidCallback? onImageCompleted,
+    double? iconSize,
   }) {
     return ImagePainter._(
       key: key,
@@ -192,6 +198,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       controlColor: controlColor,
       onImageCompleted: onImageCompleted,
+      iconSize: iconSize,
     );
   }
 
@@ -218,6 +225,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     Color? controlColor,
     VoidCallback? onImageCompleted,
+    double? iconSize,
   }) {
     return ImagePainter._(
       key: key,
@@ -241,6 +249,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       controlColor: controlColor,
       onImageCompleted: onImageCompleted,
+      iconSize: iconSize,
     );
   }
 
@@ -262,6 +271,7 @@ class ImagePainter extends StatefulWidget {
     bool? controlsAtTop,
     Color? controlColor,
     VoidCallback? onImageCompleted,
+    double? iconSize,
   }) {
     return ImagePainter._(
       key: key,
@@ -282,6 +292,7 @@ class ImagePainter extends StatefulWidget {
       controlsAtTop: controlsAtTop ?? true,
       controlColor: controlColor,
       onImageCompleted: onImageCompleted,
+      iconSize: iconSize,
     );
   }
 
@@ -356,6 +367,8 @@ class ImagePainter extends StatefulWidget {
   final TextDelegate? textDelegate;
 
   final VoidCallback? onImageCompleted;
+
+  final double? iconSize;
 
   @override
   ImagePainterState createState() => ImagePainterState();
@@ -764,7 +777,7 @@ class ImagePainterState extends State<ImagePainter> {
 
   void _openTextDialog() {
     _controller.value = _controller.value.copyWith(mode: PaintMode.text);
-    final fontSize = 6 * _controller.value.strokeWidth;
+    final fontSize = 3 * _controller.value.strokeWidth;
 
     TextDialog.show(context, _textController, fontSize, _controller.value.color, textDelegate, onFinished: (context) {
       if (_textController.text != '') {
@@ -794,7 +807,7 @@ class ImagePainterState extends State<ImagePainter> {
                     borderRadius: BorderRadius.circular(40),
                   ),
                   icon: Icon(paintModes(textDelegate).firstWhere((item) => item.mode == _ctrl.mode).icon,
-                      color: Colors.white, size: 40),
+                      color: Colors.white, size: widget.iconSize),
                   itemBuilder: (_) => [_showOptionsRow(_ctrl)],
                 );
               }),
@@ -809,10 +822,12 @@ class ImagePainterState extends State<ImagePainter> {
                   tooltip: textDelegate.changeColor,
                   icon: widget.colorIcon ??
                       Container(
+                        height: widget.iconSize,
+                        width: widget.iconSize,
                         padding: const EdgeInsets.all(4.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey),
+                          border: Border.all(color: Colors.white),
                           color: controller.color,
                         ),
                       ),
@@ -824,25 +839,28 @@ class ImagePainterState extends State<ImagePainter> {
             shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
-            icon: widget.brushIcon ?? Icon(Icons.brush, color: Colors.grey[700]),
+            icon: widget.brushIcon ?? const Icon(Icons.brush, color: Colors.white),
             itemBuilder: (_) => [_showRangeSlider()],
           ),
-          IconButton(icon: const Icon(Icons.text_format), onPressed: _openTextDialog),
+          IconButton(
+              icon: Icon(Icons.text_format, color: Colors.white, size: widget.iconSize), onPressed: _openTextDialog),
           const Spacer(),
           IconButton(
               tooltip: textDelegate.undo,
-              icon: widget.undoIcon ?? const Icon(Icons.reply, color: Colors.white, size: 40),
+              icon: widget.undoIcon ?? Icon(Icons.reply, color: Colors.white, size: widget.iconSize),
               onPressed: () {
                 print(_paintHistory.length);
                 if (_paintHistory.isNotEmpty) {
                   setState(_paintHistory.removeLast);
                 }
               }),
+          const SizedBox(width: 24),
           IconButton(
             tooltip: textDelegate.clearAllProgress,
-            icon: widget.clearAllIcon ?? const Icon(Icons.clear, color: Colors.white, size: 40),
+            icon: widget.clearAllIcon ?? Icon(Icons.clear, color: Colors.white, size: widget.iconSize),
             onPressed: () => setState(_paintHistory.clear),
           ),
+          const SizedBox(width: 24),
           TextButton(
             child:
                 const Text("Done", style: TextStyle(color: Colors.yellow, fontSize: 24, fontWeight: FontWeight.w500)),
