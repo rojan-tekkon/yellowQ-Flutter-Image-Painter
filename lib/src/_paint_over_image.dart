@@ -825,7 +825,7 @@ class ImagePainterState extends State<ImagePainter> {
                       Container(
                         height: widget.iconSize,
                         width: widget.iconSize,
-                        padding: const EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(color: Colors.white),
