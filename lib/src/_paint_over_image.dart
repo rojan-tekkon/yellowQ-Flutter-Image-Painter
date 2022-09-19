@@ -740,6 +740,7 @@ class ImagePainterState extends State<ImagePainter> {
               return ColorItem(
                 isSelected: color == controller.color,
                 color: color,
+                radius: widget.iconSize,
                 onTap: () {
                   _controller.value = controller.copyWith(color: color);
                   if (widget.onColorChanged != null) {
@@ -811,6 +812,7 @@ class ImagePainterState extends State<ImagePainter> {
                   itemBuilder: (_) => [_showOptionsRow(_ctrl)],
                 );
               }),
+          const SizedBox(width: 24),
           ValueListenableBuilder<Controller>(
               valueListenable: _controller,
               builder: (_, controller, __) {
@@ -834,6 +836,7 @@ class ImagePainterState extends State<ImagePainter> {
                   itemBuilder: (_) => [_showColorPicker(controller)],
                 );
               }),
+          const SizedBox(width: 24),
           PopupMenuButton(
             tooltip: textDelegate.changeBrushSize,
             shape: ContinuousRectangleBorder(
@@ -842,6 +845,7 @@ class ImagePainterState extends State<ImagePainter> {
             icon: widget.brushIcon ?? const Icon(Icons.brush, color: Colors.white),
             itemBuilder: (_) => [_showRangeSlider()],
           ),
+          const SizedBox(width: 24),
           IconButton(
               icon: Icon(Icons.text_format, color: Colors.white, size: widget.iconSize), onPressed: _openTextDialog),
           const Spacer(),
@@ -863,7 +867,7 @@ class ImagePainterState extends State<ImagePainter> {
           const SizedBox(width: 24),
           TextButton(
             child:
-                const Text("Done", style: TextStyle(color: Colors.yellow, fontSize: 24, fontWeight: FontWeight.w500)),
+                const Text("Done", style: TextStyle(color: Colors.yellow, fontSize: 28, fontWeight: FontWeight.w500)),
             onPressed: widget.onImageCompleted,
           ),
         ],
