@@ -795,7 +795,7 @@ class ImagePainterState extends State<ImagePainter> {
   Widget _buildControls() {
     return Container(
       padding: const EdgeInsets.all(8),
-      color: widget.controlColor ?? Colors.grey[200],
+      color: widget.controlColor ?? Colors.black,
       child: Row(
         children: [
           ValueListenableBuilder<Controller>(
