@@ -43,7 +43,7 @@ List<ModeData> paintModes(TextDelegate textDelegate) => [
       ModeData(icon: Icons.lens_outlined, mode: PaintMode.circle, label: textDelegate.circle),
       ModeData(icon: Icons.arrow_right_alt_outlined, mode: PaintMode.arrow, label: textDelegate.arrow),
       ModeData(icon: Icons.power_input, mode: PaintMode.dashLine, label: textDelegate.dashLine),
-      // ModeData(icon: Icons.text_format, mode: PaintMode.text, label: textDelegate.text),
+      ModeData(icon: Icons.text_format, mode: PaintMode.text, label: textDelegate.text),
     ];
 
 @immutable
