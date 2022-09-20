@@ -5,6 +5,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'widgets/_text_dialog.dart';
 
 import '_image_painter.dart';
 import '_ported_interactive_viewer.dart';
@@ -12,7 +13,6 @@ import 'delegates/text_delegate.dart';
 import 'widgets/_color_widget.dart';
 import 'widgets/_mode_widget.dart';
 import 'widgets/_range_slider.dart';
-import 'widgets/_text_dialog.dart';
 
 export '_image_painter.dart';
 
@@ -777,7 +777,7 @@ class ImagePainterState extends State<ImagePainter> {
 
   void _openTextDialog() {
     _controller.value = _controller.value.copyWith(mode: PaintMode.text);
-    final fontSize = 3 * _controller.value.strokeWidth;
+    final fontSize = 4 * _controller.value.strokeWidth;
 
     TextDialog.show(context, _textController, fontSize, _controller.value.color, textDelegate, onFinished: (context) {
       if (_textController.text != '') {
